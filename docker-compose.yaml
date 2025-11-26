@@ -1,0 +1,38 @@
+services:
+  app:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+    container_name: app
+    ports:
+      - "6868:8080"
+    networks:
+      - my-network-name
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/db_trabajoFinal
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=Mermelada1%
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: always
+    container_name: db
+    networks:
+      - my-network-name
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Mermelada1%
+      - POSTGRES_DB=db_trabajoFinal
+    ports:
+      - "5433:5432"
+volumes:
+  db_data:
+networks:
+  my-network-name:
+    name: springcloud
