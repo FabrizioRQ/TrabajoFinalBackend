@@ -19,7 +19,7 @@ public class DiarioEmocionalController {
     @Autowired
     private DiarioEmocionalService diarioEmocionalService;
 
-    //sera trabajado este
+
     @GetMapping("/preguntas-diarias/{niñoId}")
     public ResponseEntity<List<PreguntaEmocionalDTO>> generarPreguntasDiarias(@PathVariable Long niñoId) {
         try {
